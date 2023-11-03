@@ -1,5 +1,6 @@
 using Demo.Application.DataAcsess;
 using Demo.Application.Repositories;
+using Demo.Infrastructure.Services.SalohiddinX;
 using Demo.Infrastructure.Services.UserServices;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,6 +20,8 @@ builder.Services.AddDbContext<DemoDbContext>(option =>
 
 builder.Services.AddScoped<IDemoRepository, DemoRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ISalohiddinXService, SalohiddinXService>();
+builder.Services.AddScoped<ISalohiddinXRepository, SalohiddinXRepository>();
 
 var app = builder.Build();
 
