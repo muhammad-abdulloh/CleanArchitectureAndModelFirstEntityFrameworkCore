@@ -1,4 +1,5 @@
-﻿using Demo.Domain.Models;
+﻿using Demo.Domain.BaseModels.Entities;
+using Demo.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Demo.Application.DataAcsess
@@ -9,5 +10,7 @@ namespace Demo.Application.DataAcsess
             : base(options) { }
 
         public DbSet<User> Users { get; set; }
+
+        public DbSet<SalohiddinX> SalohiddinX { get; set; }
     }
 }
