@@ -1,4 +1,5 @@
 ﻿using Demo.Application.Repositories;
+using Demo.Domain.DTOs.UserDTOs;
 using Demo.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,26 @@ namespace Demo.Infrastructure.Services.UserServices
         {
             _demoRepo = demoRepository;
         }
+
+        public async ValueTask<bool> CreateAsync(UserDTO userDTO)
+        {
+            try
+            {
+                bool result =  await _demoRepo.CreateAsync(userDTO);
+
+                return result;
+
+            } catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public ValueTask<bool> DeleteAsync(int Id)
+        {
+            throw new NotImplementedException();
+        }
+
         public async ValueTask<IEnumerable<User>> GetAllUsersAsync()
         {
             try
@@ -28,10 +49,20 @@ namespace Demo.Infrastructure.Services.UserServices
 
                 return Enumerable.Empty<User>();
             }
-            catch (Exception ex)
+            catch
             {
                 return Enumerable.Empty<User>();
             }
+        }
+
+        public ValueTask<User> GetByIdAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ValueTask<bool> UpdateAsync(UpdateDTO user)
+        {
+            throw new NotImplementedException();
         }
     }
 }

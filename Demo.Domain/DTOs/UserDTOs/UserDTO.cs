@@ -5,19 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Demo.Domain.Models
+namespace Demo.Domain.DTOs.UserDTOs
 {
-    public class User
+    public class UserDTO
     {
-        public int Id { get; set; }
-
         [Required]
         public string? Name { get; set; }
         public string? Email { get; set; }
 
         [Required]
-        public string Password { get; set; }
+        public string? Password { get; set; }
         public int Age { get; set; }
-
     }
 }

@@ -1,4 +1,5 @@
-﻿using Demo.Domain.Models;
+﻿using Demo.Domain.DTOs.UserDTOs;
+using Demo.Domain.Models;
 using Demo.Infrastructure.Services.UserServices;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,6 +23,14 @@ namespace Demo.API.Controllers
             IEnumerable<User> users = await _userService.GetAllUsersAsync();
             
             return Ok(users);
+        }
+
+        [HttpPost]
+        public async ValueTask<IActionResult> CreateUser(UserDTO model)
+        {
+            bool value = await _userService.CreateAsync(model);
+
+            return Ok(value);
         }
     }
 }
