@@ -1,5 +1,7 @@
 using Demo.Application.DataAcsess;
 using Demo.Application.Repositories;
+using Demo.Application.Repositories.KamronbekXRepositories;
+using Demo.Infrastructure.Services.KamronbekXServices;
 using Demo.Infrastructure.Services.UserServices;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,6 +21,9 @@ builder.Services.AddDbContext<DemoDbContext>(option =>
 
 builder.Services.AddScoped<IDemoRepository, DemoRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+
+builder.Services.AddScoped<IKamronbekRepository, KamronbekXRepository>();
+builder.Services.AddScoped<IKamronbekXService, KamronbekXService>();
 
 var app = builder.Build();
 
