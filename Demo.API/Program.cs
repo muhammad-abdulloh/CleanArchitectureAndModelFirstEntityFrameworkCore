@@ -1,5 +1,6 @@
 using Demo.Application.DataAcsess;
 using Demo.Application.Repositories;
+using Demo.Infrastructure.Services.SarvarXServices;
 using Demo.Infrastructure.Services.UserServices;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,6 +20,9 @@ builder.Services.AddDbContext<DemoDbContext>(option =>
 
 builder.Services.AddScoped<IDemoRepository, DemoRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ISarvarXRepository, SarvarXRepository>();
+builder.Services.AddScoped<ISarvarXService, SarvarXService>();
+
 
 var app = builder.Build();
 
