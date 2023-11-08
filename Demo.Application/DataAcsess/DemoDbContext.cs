@@ -11,5 +11,9 @@ namespace Demo.Application.DataAcsess
 
         public DbSet<User> Users { get; set; }
         public DbSet<KamronbekX> KamronbekXes { get; set; }
+        public DbSet<Person> Persons { get; set; }
+        public DbSet<Car> Cars { get; set; }
+        public DbSet<PersonCars> PersonCars { get; set; }
+        public DbSet<Order> Orders { get; set; }
     }
 }
