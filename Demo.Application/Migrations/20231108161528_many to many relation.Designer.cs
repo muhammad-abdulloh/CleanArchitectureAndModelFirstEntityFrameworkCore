@@ -4,6 +4,7 @@ using Demo.Application.DataAcsess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Demo.Application.Migrations
 {
     [DbContext(typeof(DemoDbContext))]
-    partial class DemoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231108161528_many to many relation")]
+    partial class manytomanyrelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,28 +75,6 @@ namespace Demo.Application.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("KamronbekXes");
-                });
-
-            modelBuilder.Entity("Demo.Domain.Models.KamronbekXModel.Order", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PersonId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PersonId");
-
-                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("Demo.Domain.Models.KamronbekXModel.Person", b =>
@@ -173,17 +154,6 @@ namespace Demo.Application.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Demo.Domain.Models.KamronbekXModel.Order", b =>
-                {
-                    b.HasOne("Demo.Domain.Models.KamronbekXModel.Person", "Person")
-                        .WithMany("Orders")
-                        .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Person");
-                });
-
             modelBuilder.Entity("Demo.Domain.Models.KamronbekXModel.PersonCars", b =>
                 {
                     b.HasOne("Demo.Domain.Models.KamronbekXModel.Car", "Car")
@@ -210,8 +180,6 @@ namespace Demo.Application.Migrations
 
             modelBuilder.Entity("Demo.Domain.Models.KamronbekXModel.Person", b =>
                 {
-                    b.Navigation("Orders");
-
                     b.Navigation("PersonCars");
                 });
 #pragma warning restore 612, 618

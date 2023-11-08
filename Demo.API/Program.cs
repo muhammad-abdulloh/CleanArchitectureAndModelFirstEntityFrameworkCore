@@ -1,7 +1,10 @@
 using Demo.Application.DataAcsess;
 using Demo.Application.Repositories;
+using Demo.Application.Repositories.KamronbekXRepositories;
+using Demo.Infrastructure.Services.KamronbekXServices;
 using Demo.Infrastructure.Services.UserServices;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +23,11 @@ builder.Services.AddDbContext<DemoDbContext>(option =>
 builder.Services.AddScoped<IDemoRepository, DemoRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 
+builder.Services.AddScoped<IKamronbekRepository, KamronbekXRepository>();
+builder.Services.AddScoped<IKamronbekXService, KamronbekXService>();
+
+builder.Services.AddControllersWithViews()
+    .AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

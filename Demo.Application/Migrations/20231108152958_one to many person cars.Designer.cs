@@ -4,6 +4,7 @@ using Demo.Application.DataAcsess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Demo.Application.Migrations
 {
     [DbContext(typeof(DemoDbContext))]
-    partial class DemoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231108152958_one to many person cars")]
+    partial class onetomanypersoncars
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,7 +37,12 @@ namespace Demo.Application.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("PersonInfoId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("PersonInfoId");
 
                     b.ToTable("Cars");
                 });
@@ -74,28 +82,6 @@ namespace Demo.Application.Migrations
                     b.ToTable("KamronbekXes");
                 });
 
-            modelBuilder.Entity("Demo.Domain.Models.KamronbekXModel.Order", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PersonId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PersonId");
-
-                    b.ToTable("Orders");
-                });
-
             modelBuilder.Entity("Demo.Domain.Models.KamronbekXModel.Person", b =>
                 {
                     b.Property<int>("Id")
@@ -111,29 +97,6 @@ namespace Demo.Application.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Persons");
-                });
-
-            modelBuilder.Entity("Demo.Domain.Models.KamronbekXModel.PersonCars", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CarId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PersonId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CarId");
-
-                    b.HasIndex("PersonId");
-
-                    b.ToTable("PersonCars");
                 });
 
             modelBuilder.Entity("Demo.Domain.Models.User", b =>
@@ -173,46 +136,20 @@ namespace Demo.Application.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Demo.Domain.Models.KamronbekXModel.Order", b =>
-                {
-                    b.HasOne("Demo.Domain.Models.KamronbekXModel.Person", "Person")
-                        .WithMany("Orders")
-                        .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Person");
-                });
-
-            modelBuilder.Entity("Demo.Domain.Models.KamronbekXModel.PersonCars", b =>
-                {
-                    b.HasOne("Demo.Domain.Models.KamronbekXModel.Car", "Car")
-                        .WithMany("CarPersons")
-                        .HasForeignKey("CarId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Demo.Domain.Models.KamronbekXModel.Person", "Person")
-                        .WithMany("PersonCars")
-                        .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Car");
-
-                    b.Navigation("Person");
-                });
-
             modelBuilder.Entity("Demo.Domain.Models.KamronbekXModel.Car", b =>
                 {
-                    b.Navigation("CarPersons");
+                    b.HasOne("Demo.Domain.Models.KamronbekXModel.Person", "Person")
+                        .WithMany("Cars")
+                        .HasForeignKey("PersonInfoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Person");
                 });
 
             modelBuilder.Entity("Demo.Domain.Models.KamronbekXModel.Person", b =>
                 {
-                    b.Navigation("Orders");
-
-                    b.Navigation("PersonCars");
+                    b.Navigation("Cars");
                 });
 #pragma warning restore 612, 618
         }
