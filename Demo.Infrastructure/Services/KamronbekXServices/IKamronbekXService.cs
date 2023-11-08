@@ -1,13 +1,15 @@
-﻿using Demo.Application.Repositories.KamronbekXRepositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Demo.Domain.Models.KamronbekXModel;
 
 namespace Demo.Infrastructure.Services.KamronbekXServices
 {
-    public interface IKamronbekXService : IKamronbekRepository
+    public interface IKamronbekXService
     {
+        ValueTask<bool> CreateCarAsync(string carName);
+        ValueTask<bool> CreatePersonAsync(string personName);
+        ValueTask<bool> CreateOrderAsync(string orderName, int personId);
+        ValueTask<bool> CreatePersonCarsAsync(int personid, int carid);
+        ValueTask<IEnumerable<KamronbekX>> GetAllAsync();
+        ValueTask<IEnumerable<Person>> GetPeopleAsync();
+
     }
 }
