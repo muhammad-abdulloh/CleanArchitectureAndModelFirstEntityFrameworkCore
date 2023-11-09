@@ -1,4 +1,5 @@
 ﻿using Demo.Application.Repositories.KamronbekXRepositories;
+using Demo.Application.Repositories.PersonRepositories;
 using Demo.Domain.Models.KamronbekXModel;
 
 namespace Demo.Infrastructure.Services.KamronbekXServices;
@@ -6,10 +7,18 @@ namespace Demo.Infrastructure.Services.KamronbekXServices;
 public class KamronbekXService : IKamronbekXService
 {
     private readonly IKamronbekRepository kamronbekRepository;
+    private readonly IPersonRepository _personRepository;
 
-    public KamronbekXService(IKamronbekRepository kamronbekRepository)
+    public KamronbekXService(IKamronbekRepository kamronbekRepository, IPersonRepository person)
     {
         this.kamronbekRepository = kamronbekRepository;
+        _personRepository = person;
+    }
+
+    public async ValueTask<bool> AddorderToPerson(int id, string name)
+    {
+        var order = new Order() { Name = name };
+        return await _personRepository.AddOrdertoPerson(id, order);
     }
 
     public async ValueTask<bool> CreateCarAsync(string carName)
@@ -24,7 +33,7 @@ public class KamronbekXService : IKamronbekXService
             Name = orderName,
             PersonId = personId
         };
-        return await kamronbekRepository.CreateOrderAsync(order);
+        return true;// await kamronbekRepository.CreateOrderAsync(order);
     }
 
     public async ValueTask<bool> CreatePersonAsync(string personName)

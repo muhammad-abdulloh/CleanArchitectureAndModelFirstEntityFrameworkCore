@@ -10,6 +10,7 @@ namespace Demo.Infrastructure.Services.KamronbekXServices
         ValueTask<bool> CreatePersonCarsAsync(int personid, int carid);
         ValueTask<IEnumerable<KamronbekX>> GetAllAsync();
         ValueTask<IEnumerable<Person>> GetPeopleAsync();
+        ValueTask<bool> AddorderToPerson(int id, string name);
 
     }
 }
