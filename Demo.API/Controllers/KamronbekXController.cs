@@ -49,5 +49,11 @@ namespace Demo.API.Controllers
             bool res = await kamronbekService.CreateOrderAsync(order, personId);
             return Ok(res);
         }
+        [HttpPost]
+        public async ValueTask<IActionResult> AddorderToPersonAsync(int id, string ordername)
+        {
+            bool res = await kamronbekService.AddorderToPerson(id, ordername);
+            return Ok(res);
+        }
     }
 }
