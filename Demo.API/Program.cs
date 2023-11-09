@@ -1,7 +1,11 @@
 using Demo.Application.DataAcsess;
 using Demo.Application.Repositories;
 using Demo.Application.Repositories.KamronbekXRepositories;
+using Demo.Application.Repositories.OrderRepositories;
+using Demo.Application.Repositories.PersonRepositories;
 using Demo.Infrastructure.Services.KamronbekXServices;
+using Demo.Infrastructure.Services.OrdersService;
+using Demo.Infrastructure.Services.PersonServices;
 using Demo.Infrastructure.Services.UserServices;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
@@ -25,6 +29,10 @@ builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddScoped<IKamronbekRepository, KamronbekXRepository>();
 builder.Services.AddScoped<IKamronbekXService, KamronbekXService>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IPersonRepository, PersonRepository>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IPersonService, PersonService>(); 
 
 builder.Services.AddControllersWithViews()
     .AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
