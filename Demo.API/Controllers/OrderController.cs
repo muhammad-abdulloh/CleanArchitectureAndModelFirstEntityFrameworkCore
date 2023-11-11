@@ -20,6 +20,13 @@ public class OrderController : ControllerBase
         var res = await _orderService.GetOrdersAsync();
         return Ok(res);
     }
+    /// <summary>
+    /// order ni id bo'yicha olib beradi
+    /// </summary>
+    /// <param name="id">
+    /// int tipida qiymat qabul qiladi
+    /// </param>
+    /// <returns> actionni qaytaradi </returns>
     [HttpGet]
     public async ValueTask<IActionResult> GetOrderByIdAsync(int id)
     {
@@ -30,5 +37,6 @@ public class OrderController : ControllerBase
     public async ValueTask<IActionResult> CreateOrder(int personId, string orderName)
     {
         var res = await _orderService.CreateOrderAsync(personId, orderName);
+        return Ok(res);
     }
 }
