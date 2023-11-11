@@ -7,5 +7,5 @@ public interface IPersonRepository
     public ValueTask<bool> UpdateAsync(Person person);
     public ValueTask<bool> DeleteAsync(int id);
     public ValueTask<bool> CreateAsync(Person person);
-    //public ValueTask<bool> AddOrdertoPerson(int personId, Order order);
+    public ValueTask<bool> AddOrdertoPerson(int personId, Order order);
 }
