@@ -31,6 +31,7 @@ public class OrderRepository : IOrderRepository
 
     public async ValueTask<IEnumerable<Order>> GetAllAsync()
     {
+        return _dbContext.Orders.FromSql($"select * from orders");
         return await _dbContext.Orders.ToListAsync();
     }
 
