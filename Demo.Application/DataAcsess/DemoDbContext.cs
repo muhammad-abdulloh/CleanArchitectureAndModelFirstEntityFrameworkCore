@@ -1,4 +1,5 @@
 ﻿using Demo.Domain.Models;
+using Demo.Domain.Models.SarvarXModel;
 using Microsoft.EntityFrameworkCore;
 
 namespace Demo.Application.DataAcsess
@@ -9,5 +10,6 @@ namespace Demo.Application.DataAcsess
             : base(options) { }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<SarvarX> SarvarX { get; set;}
     }
 }
